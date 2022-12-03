@@ -11,10 +11,10 @@ public class MessageController {
     private HashSet<Message> messagesSeen;
     // why a HashSet??
 
-    public ArrayList<Message> getMessages() {
-        return null;
+    public HashSet<Message> getMessages() {
+        return messagesSeen;
     }
-    public ArrayList<Message> getMessagesForId(Id Id) {
+    public HashSet<Message> getMessagesForId(Id Id) {
         return null;
     }
     public Message getMessageForSequence(String seq) {

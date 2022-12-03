@@ -14,7 +14,6 @@ package models;
 *
  */
 public class Message implements Comparable {
-
     private String message = "";
     private String toId = "";
     private String fromId = "";
