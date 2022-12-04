@@ -6,10 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import controllers.IdController;
 import controllers.MessageController;
 import controllers.TransactionController;
+import models.Id;
+import models.Message;
 import youareell.YouAreEll;
 
 // Simple Shell is a Console view for youareell.YouAreEll.
@@ -22,6 +25,8 @@ public class SimpleShell {
     }
     public static void main(String[] args) throws java.io.IOException {
         YouAreEll urll = new YouAreEll(new TransactionController(new MessageController(), new IdController()));
+
+        TransactionController tt = new TransactionController(new MessageController(), new IdController());
 
         String commandLine;
         BufferedReader console = new BufferedReader
@@ -66,23 +71,45 @@ public class SimpleShell {
                     }
 
                     // Specific Commands.
-
                     // ids
                     if (list.contains("ids") && list.size() > 1) {
-                        String results = urll.post_id(commands[1], commands[2]);
+                        String results = tt.postId(commands[1], commands[2]);
                         SimpleShell.prettyPrint(results);
                         continue;
                     }
-
                     if (list.contains("ids")) {
-                        String results = urll.get_ids();
+                        String results = tt.getIds().stream().map(Id::toString).collect(Collectors.joining());
                         SimpleShell.prettyPrint(results);
                         continue;
                     }
 
                     // messages
+                    if (list.contains("send") && list.size() >= 3) {
+                        String message = "";
+                        String senderName = list.get(1);
+                        String friendName = list.get(list.size()-1);
+                        String results = "";
+                        int containsTo = list.size()-2;
+                        if(list.get(containsTo).equalsIgnoreCase("to")) {
+                            for(int i = 2; i < list.size()-3; i++) {
+                                message += list.get(i) + " ";
+                            }
+                            message += list.get(list.size()-3);
+                            results = tt.postMessageToFriend(senderName, message, friendName);
+                        }
+                        else {
+                            for (int i = 2; i < list.size() - 1; i++) {
+                                message += list.get(i) + " ";
+                            }
+                            message += list.get(list.size() - 1);
+                            results = tt.postGlobalMessage(senderName, message);
+                        }
+                        SimpleShell.prettyPrint(results);
+                        continue;
+                    }
+
                     if (list.contains("messages")) {
-                        String results = urll.get_messages();
+                        String results = tt.getMessages().stream().map(Message::toString).collect(Collectors.joining());
                         SimpleShell.prettyPrint(results);
                         continue;
                     }

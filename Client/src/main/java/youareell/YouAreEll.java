@@ -1,5 +1,6 @@
 package youareell;
 import controllers.*;
+import models.Message;
 
 import java.io.IOException;
 
@@ -8,6 +9,7 @@ public class YouAreEll {
     public YouAreEll (TransactionController t) {
         this.tt = t;
     }
+    MessageController mc = new MessageController();
     public static void main(String[] args) {
         // hmm: is this Dependency Injection?
         YouAreEll urlhandler = new YouAreEll(
@@ -29,6 +31,9 @@ public class YouAreEll {
         return MakeURLCall("/messages", "GET", "");
     }
     private String MakeURLCall(String s, String get, String s1) {
-        return s + " " + get + " " + s1;
+        return null;
+    }
+    public String post_message(String sequence, String timeStamp, String myId, String toId, String message) {
+        return null;
     }
 }

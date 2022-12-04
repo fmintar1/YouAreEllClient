@@ -1,6 +1,12 @@
 package models;
 
-/* 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.sql.Timestamp;
+import java.util.Date;
+
+/*
  * POJO for an Message object
  *
  *   {
@@ -14,29 +20,34 @@ package models;
 *
  */
 public class Message implements Comparable {
+    Date date = new Date();
+    @JsonProperty("message")
     private String message = "";
+    @JsonProperty("toid")
     private String toId = "";
+    @JsonProperty("fromid")
     private String fromId = "";
+//    private String timestamp = "";
+    @JsonIgnoreProperties
     private String timestamp = "";
+    @JsonProperty("sequence")
     private String seqId = "";
 
+    public Message() {
+    }
     public Message (String message, String fromId, String toId) {
+        this(message, fromId, toId, null, "");
+    }
+    public Message (String message, String fromId) {
+        this(message, fromId, "", null, "");
+    }
+    public Message (String message, String fromId, String toId, String timestamp, String seqId) {
         this.message = message;
         this.fromId = fromId;
         this.toId = toId;
+        this.timestamp = timestamp;
+        this.seqId = seqId;
     }
-
-    public Message (String message, String fromId) {
-        this.message = message;
-        this.fromId = fromId;
-        this.toId = "";
-    }
-
-    @Override
-    public String toString() {
-        return "to: " + this.toId + "\nfrom: "+ this.fromId + "\n" + this.message + "\n----\n";
-    }
-
     public int compareTo(Object o) {
         return this.seqId.compareTo(((Message) o).getSeqId());
     }
@@ -71,5 +82,17 @@ public class Message implements Comparable {
 
     public String getSeqId() {
         return seqId;
+    }
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append("\n{")
+                .append("\n\tSequence: " + this.seqId)
+                .append("\n\tTime Stamp: " + this.timestamp)
+                .append("\n\tFrom ID: " + this.fromId)
+                .append("\n\tTo ID: " + this.toId)
+                .append("\n\tMessage " + this.message)
+                .append("\n}")
+                .toString();
     }
 }
