@@ -1,6 +1,4 @@
 package controllers;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import models.Id;
 import models.Message;
 
@@ -32,7 +30,6 @@ public class TransactionController {
         msgCtrl.postMessage(mid);
         return ("Message sent globally");
     }
-
     public String postMessageToFriend(String sender, String message, String friend) {
         Message mid = new Message(message, sender, friend);
         msgCtrl.postMessage(mid);

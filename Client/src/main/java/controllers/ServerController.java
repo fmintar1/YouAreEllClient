@@ -13,10 +13,10 @@ public class ServerController {
     }
     public static String apiGet(String extension) {
         try {
-            HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(rootURL + extension))
                     .build();
+            HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(request,
                     HttpResponse.BodyHandlers.ofString());
             return response.body();

@@ -2,12 +2,9 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Id;
-import models.Message;
 
 public class IdController {
 
@@ -28,7 +25,6 @@ public class IdController {
 
     public Id postId(Id id) {
 //        return ServerController.shared().apiPost("/ids", id.getName());
-//    }
         try {
             String temp = mapper.writeValueAsString(id);
             String temp2 = ServerController.apiPost("/ids", temp);

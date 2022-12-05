@@ -69,7 +69,6 @@ public class SimpleShell {
                             System.out.println((index++) + " " + s);
                         continue;
                     }
-
                     // Specific Commands.
                     // ids
                     if (list.contains("ids") && list.size() > 1) {
@@ -88,7 +87,7 @@ public class SimpleShell {
                         String message = "";
                         String senderName = list.get(1);
                         String friendName = list.get(list.size()-1);
-                        String results = "";
+                        String results;
                         int containsTo = list.size()-2;
                         if(list.get(containsTo).equalsIgnoreCase("to")) {
                             for(int i = 2; i < list.size()-3; i++) {

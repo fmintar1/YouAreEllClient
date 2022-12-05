@@ -9,8 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Id {
     @JsonProperty("userid")
     private String uid = "";
-    @JsonIgnoreProperties
+    @JsonProperty("name")
     private String name = "";
+    @JsonProperty("github")
     private String github = "";
 
     public Id() {

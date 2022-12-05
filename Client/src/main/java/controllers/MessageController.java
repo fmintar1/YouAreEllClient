@@ -1,13 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,7 +10,6 @@ import models.Id;
 import models.Message;
 
 public class MessageController {
-    private String rootURL = "http://zipcode.rocks:8085";
     private ObjectMapper mapper = new ObjectMapper();
 
     private HashSet<Message> messagesSeen;

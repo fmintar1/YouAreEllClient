@@ -1,9 +1,5 @@
 package models;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.sql.Timestamp;
 import java.util.Date;
 
 /*
@@ -20,15 +16,13 @@ import java.util.Date;
 *
  */
 public class Message implements Comparable {
-    Date date = new Date();
     @JsonProperty("message")
     private String message = "";
     @JsonProperty("toid")
     private String toId = "";
     @JsonProperty("fromid")
     private String fromId = "";
-//    private String timestamp = "";
-    @JsonIgnoreProperties
+    @JsonProperty("timestamp")
     private String timestamp = "";
     @JsonProperty("sequence")
     private String seqId = "";
@@ -51,7 +45,6 @@ public class Message implements Comparable {
     public int compareTo(Object o) {
         return this.seqId.compareTo(((Message) o).getSeqId());
     }
-
     public String getMessage() {
         return message;
     }
